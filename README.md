@@ -4,7 +4,7 @@
 
     1、按照传统的特征工程->调参->模型融合
 	2、利用basic seq2seq时序模型
-    3、利用CNN进行8（R）、9R（G）、10G（B）多层特征提取，形成高维特征B,然后利用XGBoost或者RandomForest进行回归
+    3、利用CNN进行8（R）、9（G）、10（B）多层特征提取，形成高维特征,然后利用XGBoost或者RandomForest进行回归预测
 
 ## 1、传统思路
 ### 特征工程
