@@ -36,5 +36,5 @@
 	偷懒利用了TPOT进行调参，得出单模型还是使用XGBoost又快又好。
 
 ### 模型融合
-	未完待续
+	利用RF/ET/GBM/XGB作为Base Model，XGB作为第二层
 
