@@ -127,3 +127,15 @@ import numpy as np
 # 	raw_data[title] = raw_data[title+'9'] + raw_data[title +'10'] + raw_data[title +'11']
 # 	# print(raw_data[title])
 # 	raw_data[title].to_csv('../data/'+title+'9-11.csv')
+
+
+merge_data1 = pd.read_csv('../result/v10-prediction_XGB.csv')
+loan_sum1 = merge_data1['loan_sum']
+merge_data2 = pd.read_csv('../result/v3-prediction_ET.csv')
+loan_sum2 = merge_data2['loan_sum']
+
+loan_sum = pd.DataFrame(0.5*loan_sum2 + 0.5*loan_sum1)
+loan_sum[loan_sum <1] = 0
+loan_sum.to_csv('../result/addModel.csv')
+print(loan_sum)
+

@@ -39,20 +39,20 @@ import numpy as np
 # merge_loan_data.to_csv('./featureData/merge_order_data.csv')
 
 '''user ability'''
-raw_data = pd.read_csv('../data/userInfoSum_9-11.csv')
-order_ability = pd.Series(raw_data['order_price_sum'])/pd.Series(raw_data['order_count_sum'])
-loan_ability = pd.Series(raw_data['loan_price_sum'])/pd.Series(raw_data['loan_count_sum'])
-repayment_ability = pd.Series(raw_data['loan_price_sum'])/pd.Series(raw_data['plannum_sum'])
-active_ability = pd.Series(raw_data['click_count_sum'])/3.0
-consumer_model = pd.Series(raw_data['loan_price_sum'])/pd.Series(raw_data['order_price_sum'])
-click_model = pd.Series(raw_data['loan_count_sum'])/pd.Series(raw_data['order_count_sum'])
-
-order_ability.to_csv('../data/ability/order_ability.csv')
-loan_ability.to_csv('../data/ability/loan_ability.csv')
-repayment_ability.to_csv('../data/ability/repayment_ability.csv')
-active_ability.to_csv('../data/ability/active_ability.csv')
-consumer_model.to_csv('../data/ability/consumer_model.csv')
-click_model.to_csv('../data/ability/click_model.csv')
+# raw_data = pd.read_csv('../data/userInfoSum_9-11.csv')
+# order_ability = pd.Series(raw_data['order_price_sum'])/pd.Series(raw_data['order_count_sum'])
+# loan_ability = pd.Series(raw_data['loan_price_sum'])/pd.Series(raw_data['loan_count_sum'])
+# repayment_ability = pd.Series(raw_data['loan_price_sum'])/pd.Series(raw_data['plannum_sum'])
+# active_ability = pd.Series(raw_data['click_count_sum'])/3.0
+# consumer_model = pd.Series(raw_data['loan_price_sum'])/pd.Series(raw_data['order_price_sum'])
+# click_model = pd.Series(raw_data['loan_count_sum'])/pd.Series(raw_data['order_count_sum'])
+#
+# order_ability.to_csv('../data/ability/order_ability.csv')
+# loan_ability.to_csv('../data/ability/loan_ability.csv')
+# repayment_ability.to_csv('../data/ability/repayment_ability.csv')
+# active_ability.to_csv('../data/ability/active_ability.csv')
+# consumer_model.to_csv('../data/ability/consumer_model.csv')
+# click_model.to_csv('../data/ability/click_model.csv')
 
 
 # process Nan value with mean
@@ -118,9 +118,10 @@ click_model.to_csv('../data/ability/click_model.csv')
 # plt.show()
 
 # analysis loan_sum
+# merge_data = pd.read_csv('../result/v10-prediction_XGB.csv')
 # fig, axes = plt.subplots(nrows=2, ncols=1)
 # merge_data['loan_sum'].hist(bins=100, ax=axes[0])
-# merge_data['loan_sum'] = np.log1p(merge_data['loan_sum'])
+# # merge_data['loan_sum'] = np.log1p(merge_data['loan_sum'])
 # # merge_data['loan_price_sum'].to_csv('./logData/log_loan_price_sum.csv')
 # merge_data['loan_sum'].hist(bins=100, ax=axes[1])
 # plt.title('loan_sum')

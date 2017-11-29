@@ -3,8 +3,7 @@
 ## 主要思路为
 
 	1、按照传统的特征工程->调参->模型融合
-	2、利用basic seq2seq时序模型
-    3、利用CNN进行8（R）、9（G）、10（B）多层特征提取，形成高维特征,然后利用XGBoost或者RandomForest进行回归
+	2、利用seq2seq时序模型，提取特征，免去时序特征分析的工作。
 
 ## 1、传统思路
 ### 特征工程
@@ -29,7 +28,7 @@
 
 绘制变量之间两两的分布和相关度图表。
 
-    目前对于时序数据的处理采用了package的方式，将8-11月的数据进行sum()，然后利用
+    目前对于时序数据的处理采用了package的方式，将8-10月和9-11月的数据进行sum()，然后构造
     "loan_price_sum/plannum=repayment_ability",
     "loan_price_sum/loan_count_sum=loan_ability",
     "order_price_sum/order_count_sum=order_ability",
@@ -37,7 +36,7 @@
     "loan_price_sum/order_price_sum"=consumer_model
     "loan_count_sum/order_count_sum"=click_model
     作为新的属性值。
-   特征工程有待进一步丰富,主要从data time feature, lagging feature, window feature,这里仅仅考虑了window feature。也可以尝试利用聚类等无监督学习的方式学习特征。
+   特征工程有待进一步丰富,主要从data time feature, lagging feature, window feature,这里仅仅考虑了window feature。也可以尝试利用聚类等无监督学习的方式学习特征。最高得分上限为：1.85，应该是特征工程做得不够充分，没有对时序特征进行加工。
 
 ### 调参
 
@@ -45,4 +44,12 @@
 
 ### 模型融合
 	利用RF/ET/GBM/XGB作为Base Model，XGB作为第二层
+
+## 2、seqseq思路
+	未完待续。。。
+
+
+
+
+
 

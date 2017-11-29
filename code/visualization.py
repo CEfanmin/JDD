@@ -1,14 +1,42 @@
 import pandas as pd
 from pandas import DataFrame
 from math import exp
-from pylab import *
 import matplotlib.pyplot as plot
+import scipy.stats as stats
+
+
+merge_data = pd.read_csv('../result/t_loan_sum.csv')
+loan_sum = merge_data['loan_sum'].tolist()
+stats.probplot(loan_sum, dist="norm", plot=plot.subplot(221))
+plot.title('t_loan_sum')
+
+merge_data = pd.read_csv('../result/v10-prediction_XGB.csv')
+loan_sum = merge_data['loan_sum'].tolist()
+stats.probplot(loan_sum, dist="norm", plot=plot.subplot(222))
+plot.title('v10-prediction_XGB')
+
+merge_data = pd.read_csv('../result/addModel.csv')
+loan_sum = merge_data['loan_sum'].tolist()
+stats.probplot(loan_sum, dist="norm", plot=plot.subplot(223))
+plot.title('addModel')
+
+merge_data = pd.read_csv('../result/v3-prediction_ET.csv')
+loan_sum = merge_data['loan_sum'].tolist()
+stats.probplot(loan_sum, dist="norm", plot=plot.subplot(224))
+plot.title('v3-prediction_ET')
+
+# merge_data = pd.read_csv('../result/v2-prediction_StackingModel.csv')
+# loan_sum = merge_data['loan_sum'].tolist()
+# stats.probplot(loan_sum, dist="norm", plot=plot.subplot(325))
+# plot.title('v2-prediction_StackingModel')
+plot.show()
+
 
 # heat map
-merge_data = pd.read_csv('../data/userInfo_8-10.csv')
-print(merge_data.shape)
-corMat = DataFrame(merge_data.iloc[:, 1:22].corr())
-plot.pcolor(corMat)
+# merge_data = pd.read_csv('../data/userInfo_8-10.csv')
+# print(merge_data.shape)
+# corMat = DataFrame(merge_data.iloc[:, 1:22].corr())
+# plot.pcolor(corMat)
 plot.show()
 
 # parallel plot

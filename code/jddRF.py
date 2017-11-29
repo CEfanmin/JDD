@@ -2,6 +2,7 @@ import numpy as np
 import math
 from sklearn.model_selection import train_test_split
 from sklearn import ensemble
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error
 import pylab as plot
 from sklearn.externals import joblib
@@ -24,34 +25,47 @@ if __name__ == '__main__':
     xTrain, xTest, yTrain, yTest = train_test_split(X, y, test_size=0.20, random_state=531)
 
     # train random forest at a range of ensemble sizes in order to see how the mse changes
-    # iTrees = 800
-    nTreeList = range(100, 1000, 100)
-    for iTrees in nTreeList:
-        depth = None
-        maxFeat = 4  # try tweaking
-        loanRFModel = ensemble.RandomForestRegressor(n_estimators=iTrees, max_depth=depth, max_features=maxFeat,
-                                                     oob_score=True, random_state=531, n_jobs=3)
+    iTrees = 750
+    # nTreeList = range(100, 2000, 100)
+    # for iTrees in nTreeList:
+    depth = 10
+    maxFeat = 4  # try tweaking
+    parameter_space = {
+        "n_estimators": [700, 750, 800],
+        "min_samples_leaf": [2, 4, 6],
+        'max_features': [4, 5],
+        'max_depth': [7, 8, 9],
+    }
+    # loanRFModel = ensemble.RandomForestRegressor(n_estimators=iTrees, max_depth=depth, max_features=maxFeat,
+    #                                              oob_score=True, random_state=2017, min_samples_split=2, n_jobs=3)
+    loanRFModel = ensemble.RandomForestRegressor(oob_score=True, random_state=2017, min_samples_split=2, n_jobs=3)
+    print("Tuning hyper-parameters")
+    grid = GridSearchCV(loanRFModel, parameter_space, cv=5)
+    grid.fit(xTrain, yTrain)
+    print("Best parameters set found on development set:")
+    print(grid.best_params_)
 
-        loanRFModel.fit(xTrain, yTrain)
-        # Accumulate mse on test set
-        prediction = loanRFModel.predict(xTest)
-        rmse = math.sqrt(mean_squared_error(yTest, prediction))
-        print("validation rmse is: ", rmse, 'iTrees is:', iTrees)
 
-    # finalPrediction = loanRFModel.predict(X)
-    # total_mse = mean_squared_error(finalPrediction, y)
-    # total_rmse = math.sqrt(total_mse)
-    # print("total rmse score is: ", total_rmse)
+    # Accumulate mse on test set
+    prediction = grid.predict(xTest)
+    rmse = math.sqrt(mean_squared_error(yTest, prediction))
+    print("validation rmse is: ", rmse, ' iTrees is: ', iTrees)
+
+    finalPrediction = grid.predict(X)
+    total_mse = mean_squared_error(finalPrediction, y)
+    total_rmse = math.sqrt(total_mse)
+    print("total rmse score is: ", total_rmse)
 
     # prediction
-    # predData = pd.read_csv('../data/userInfoSum_9-11.csv')
-    # predData = predData.replace([np.inf, -np.inf], 99999)
-    # xList = predData.iloc[:, 1:16].fillna(0)
-    # X = np.array(xList)
-    # finalPrediction = loanRFModel.predict(X)
-    # data = pd.DataFrame(finalPrediction, index=np.arange(1, len(X) + 1))
-    # data[data < 1] = 0
-    # data.to_csv('../result/prediction_RF.csv')
+    predData = pd.read_csv('../data/userInfoSum_9-11.csv')
+    predData = predData.replace([np.inf, -np.inf], 99999)
+    xList = predData.iloc[:, 1:16].fillna(0)
+    X = np.array(xList)
+    finalPrediction = grid.predict(X)
+    data = pd.DataFrame(finalPrediction, index=np.arange(1, len(X) + 1))
+    data[data < 1] = 0
+    data.to_csv('../result/prediction_RF.csv')
+    print('write to csv file')
 
     # plot training and test errors vs number of trees in ensemble
     # plot.figure()
