@@ -29,7 +29,15 @@
 
 绘制变量之间两两的分布和相关度图表。
 
-    目前对于时序数据的处理采用了package的方式，将8-11月的数据进行sum()，然后利用"loan_price_sum/plannum=repayment_ability", "loan_price_sum/loan_count_sum=loan_ability","order_price_sum/order_count_sum=order_ability","click_count_sum/4=activity_ability"作为新的属性值。特征工程有待进一步丰富。
+    目前对于时序数据的处理采用了package的方式，将8-11月的数据进行sum()，然后利用
+    "loan_price_sum/plannum=repayment_ability",
+    "loan_price_sum/loan_count_sum=loan_ability",
+    "order_price_sum/order_count_sum=order_ability",
+    "click_count_sum/4=activity_ability"
+    "loan_price_sum/order_price_sum"=consumer_model
+    "loan_count_sum/order_count_sum"=click_model
+    作为新的属性值。
+   特征工程有待进一步丰富,主要从data time feature, lagging feature, window feature,这里仅仅考虑了window feature。也可以尝试利用聚类等无监督学习的方式学习特征。
 
 ### 调参
 
