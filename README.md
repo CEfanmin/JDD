@@ -50,7 +50,8 @@
     input:month data8\9\10 ->->-> output:month data 11
     input:month data9\10\11 ->->-> output:month data 12
    ![many to one](./LSTM.png "many to one")
-    在训练的时候，很容易发现loss一直不减的情况。
+
+    在训练的时候，发现loss一直不减的情况。
 
 
 
