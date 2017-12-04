@@ -46,9 +46,27 @@
 	利用RF/ET/GBM/XGB作为Base Model，XGB作为第二层
 
 ## 2、seqseq思路
-	利用seq2seq model with attention(LSTM as kernel)
-    input:month data8\9\10 ->->-> output:month data 11
-    input:month data9\10\11 ->->-> output:month data 12
+    1) Define the problem at hand and the data you will be training on; collect this data or
+	annotate it with labels if need be.
+    2) Choose how you will measure success on your problem. Which metrics will you be
+    monitoring on your validation data?
+    3) Determine your evaluation protocol: hold-out validation? K-fold validation? Which
+    portion of the data should you use for validation?
+    4) Develop a first model that does better than a basic baseline: a model that has
+    "statistical power".
+    5) Develop a model that overfits.
+    6) Regularize your model and tune its hyperparameters, based on performance on the
+    validation data
+利用seq2seq model with attention(LSTM as kernel)
+input:month data8\9\10 ->->-> output:month data 11
+input:month data9\10\11 ->->-> output:month data 12
    ![many to one](./LSTM.png "many to one")
 
-    在训练的时候，很容易发生过拟合，training loss减少，但是validation_loss增大。
+    在训练的时候，很容易发生过拟合，也就是training loss减少，但是validation_loss增大。解决思路为：
+    1）Add dropout.
+    2）Try different architectures, add or remove layers.
+    3）Add L1 / L2 regularization.
+    4）Try different hyperparameters (such as the number of units per layer, the learning rate of
+    the optimizer) to find the optimal configuration.
+    5）Optionally iterate on feature engineering: add new features, remove features that do not
+    seem to be informative.
