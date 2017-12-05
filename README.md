@@ -46,6 +46,10 @@
 	利用RF/ET/GBM/XGB作为Base Model，XGB作为第二层
 
 ## 2、seqseq思路
+利用seq2seq model with attention(LSTM as kernel)
+input:month data8\9\10 ->->-> output:month data 11
+input:month data9\10\11 ->->-> output:month data 12
+    
     1) Define the problem at hand and the data you will be training on; collect this data or
 	annotate it with labels if need be.
     2) Choose how you will measure success on your problem. Which metrics will you be
@@ -57,10 +61,9 @@
     5) Develop a model that overfits.
     6) Regularize your model and tune its hyperparameters, based on performance on the
     validation data
-利用seq2seq model with attention(LSTM as kernel)
-input:month data8\9\10 ->->-> output:month data 11
-input:month data9\10\11 ->->-> output:month data 12
+
    ![many to one](./LSTM.png "many to one")
+   ![loss](./loss.png "loss")
 
     在训练的时候，很容易发生过拟合，也就是training loss减少，但是validation_loss增大。解决思路为：
     1）Add dropout.
