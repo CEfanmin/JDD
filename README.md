@@ -74,3 +74,9 @@ input:month data9\10\11 ->->-> output:month data 12
     the optimizer) to find the optimal configuration.
     5）Optionally iterate on feature engineering: add new features, remove features that do not
     seem to be informative.
+
+## 3、CNN的思路
+	利用8、9、10月的数据进行折叠，reshape(samples, 4, features,1)，然后参照图像的方式，利用Conv2D（3，3），Maxpooling...
+    在试验中，发现容易过拟合。
+    Tuning之后，得到New Score1.847
+

@@ -57,7 +57,7 @@ keras.callbacks.TensorBoard(
 ]
 
 
-model.fit(source_data, target_data, epochs=1000, batch_size=256,validation_split=0.1,verbose=1)
+model.fit(source_data, target_data, epochs=500, batch_size=64,validation_split=0.1,verbose=1)
 # test_loss= model.evaluate(testing_features, testing_target,batch_size=128)
 # print("test_loss is: ", test_loss)
 
