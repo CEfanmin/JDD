@@ -1,4 +1,4 @@
-import os
+import os, time
 os.environ['KERAS_BACKEND'] = 'tensorflow'
 import matplotlib.pyplot as plt
 from keras import regularizers
@@ -8,7 +8,7 @@ from keras import layers
 from keras import models
 from sklearn.model_selection import train_test_split
 
-
+start_time = time.time()
 def loadData(source_file, target_file, pre_file):
 	source_data = pd.read_csv(source_file).replace([np.inf, -np.inf], 9999).fillna(0)
 	target_data = pd.read_csv(target_file).fillna(0)
