@@ -80,3 +80,8 @@ input:month data9\10\11 ->->-> output:month data 12
     在试验中，发现容易过拟合。
     Tuning之后，得到New Score1.847
 
+## 4、利用Multi-input model
+	下图所示：利用CNN进行month data的特征提取，然后利用Dense NN进行sum data的特征提取。
+   ![multi](./multi.png "multi")
+
+
