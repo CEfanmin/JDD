@@ -78,10 +78,10 @@ input:month data9\10\11 ->->-> output:month data 12
 ## 3、CNN的思路
 	利用8、9、10月的数据进行折叠，reshape(samples, 4, features,1)，然后参照图像的方式，利用Conv2D（3，3），Maxpooling...
     在试验中，发现容易过拟合。
-    Tuning之后，得到New Score1.847
+    Tuning之后，得到Score：1.847
 
 ## 4、利用Multi-input model
-	下图所示：利用CNN进行month data的特征提取，然后利用Dense NN进行sum data的特征提取。
+	下图所示：利用CNN进行month data的特征提取，然后利用Dense NN进行sum data的特征提取，得到Best Score：1.845
    ![multi](./multi.png "multi")
 
 

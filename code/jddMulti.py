@@ -44,14 +44,21 @@ month_input5 = layers.MaxPool2D(1,2)(month_input4)
 
 # DenseNet
 sum_input = Input(shape=(1,1,9), dtype='float32', name='sum_input')
-sum_input1 = layers.Dense(128,activation='relu')(sum_input)
-sum_input2 = layers.Dropout(0.5)(sum_input1)
-sum_input3 = layers.Dense(64, activation='relu')(sum_input2)
-sum_input4 = layers.Dropout(0.2)(sum_input3)
-sum_input5 = layers.Dense(32, activation='relu',kernel_regularizer=regularizers.l2(l=0.001))(sum_input4)
+sum_input1 = layers.Dense(128,activation='relu',kernel_regularizer=regularizers.l2(l=0.001))(sum_input)
+sum_input2 = layers.Dropout(0.2)(sum_input1)
+
+sum_input3 = layers.Dense(128, activation='relu',kernel_regularizer=regularizers.l2(l=0.001))(sum_input2)
+sum_input4 = layers.Dropout(0.5)(sum_input3)
+
+sum_input5 = layers.Dense(128, activation='relu',kernel_regularizer=regularizers.l2(l=0.001))(sum_input4)
+sum_input6 = layers.Dropout(0.5)(sum_input5)
+y = layers.add([sum_input1, sum_input5]) 
+
+sum_input7 = layers.Dense(64,activation='relu',kernel_regularizer=regularizers.l2(l=0.001))(y)
+
 
 # Concat
-concatenated = layers.concatenate([month_input5, sum_input5], axis=-1)
+concatenated = layers.concatenate([month_input5, sum_input7], axis=-1)
 answer = layers.Dense(1, activation='relu')(concatenated)
 
 model = Model([month_input,sum_input], answer)
@@ -63,7 +70,7 @@ model.fit({'month_input':source_data,'sum_input':sum_data},
             target_data,
             validation_split=0.1,
             epochs=1000,
-            batch_size=64,
+            batch_size=128,
             verbose=1
             )
 
