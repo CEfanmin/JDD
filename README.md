@@ -5,6 +5,7 @@
 	1、按照传统的特征工程->调参->模型融合
 	2、利用seq2seq时序模型，提取特征，免去时序特征分析的工作。
     3、利用CNN的思路，reshape(samples, 4, features,1)
+    4、利用Multi-input model
 
 ## 1、传统思路
 ### 特征工程
