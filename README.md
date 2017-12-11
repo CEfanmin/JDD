@@ -81,7 +81,8 @@ input:month data9\10\11 ->->-> output:month data 12
     Tuning之后，得到Score：1.847
 
 ## 4、利用Multi-input model
-	下图所示：利用CNN进行month data的特征提取，然后利用Dense NN进行sum data的特征提取，得到Best Score：1.845
+	下图所示：利用CNN进行month data的特征提取，然后利用Dense NN进行sum data的特征提取，得到 A 榜 Best Score：1.845， B 榜:1.826
    ![multi](./multi.png "multi")
 
-
+## 总结
+	收获颇多。把以前熟悉的各种深度的费神都的模型都尝试了一遍。其实，还是特征很重要，特征提的好，简单模型也能有很好的表现。不太熟悉金融业务，所以对于信贷数据的特征没有把握很好，这限制了模型表现的上界。
